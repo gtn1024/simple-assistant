@@ -12,9 +12,9 @@ public final class SimpleAssistant extends JavaPlugin {
 
     private SimpleAssistant() {
         super(new JvmPluginDescriptionBuilder("com.github.gtn1024.simple-assistant", "1.0-SNAPSHOT")
-                .name("simple-assistant")
-                .author("gtn1024")
-                .build());
+            .name("simple-assistant")
+            .author("gtn1024")
+            .build());
     }
 
     @Override

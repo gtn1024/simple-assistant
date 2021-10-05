@@ -22,22 +22,22 @@ public class GroupMessageHandler extends SimpleListenerHost {
     public void onMessage(@NotNull GroupMessageEvent event) { // 可以抛出任何异常, 将在 handleException 处理
         if (event.getSender().getId() != MainConfig.INSTANCE.getAdmin()) {
             event.getGroup().sendMessage(
-                    new MessageChainBuilder()
-                            .append("我只听")
-                            .append(new At(MainConfig.INSTANCE.getAdmin()))
-                            .append("的话")
-                            .build()
+                new MessageChainBuilder()
+                    .append("我只听")
+                    .append(new At(MainConfig.INSTANCE.getAdmin()))
+                    .append("的话")
+                    .build()
             );
             return;
         }
 
         event.getGroup().sendMessage(
-                new MessageChainBuilder()
-                        .append(new PlainText("你好，"))
-                        .append(new At(event.getSender().getId())).append("\n")
-                        .append("你刚才发送了以下内容：\n")
-                        .append(event.getMessage().contentToString())
-                        .build()
+            new MessageChainBuilder()
+                .append(new PlainText("你好，"))
+                .append(new At(event.getSender().getId())).append("\n")
+                .append("你刚才发送了以下内容：\n")
+                .append(event.getMessage().contentToString())
+                .build()
         );
     }
 }
