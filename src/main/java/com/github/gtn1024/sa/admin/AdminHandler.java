@@ -49,7 +49,8 @@ public class AdminHandler extends SimpleListenerHost {
         if ((config.getConfig().getOwnerIsAdmin()) && (id == event.getGroup().getOwner().getId())) {
             return true;
         }
-        if ((config.getConfig().getManagerIsAdmin()) && (event.getPermission().getLevel() == MemberPermission.ADMINISTRATOR.getLevel())) {
+        if ((config.getConfig().getManagerIsAdmin())
+            && (event.getPermission().getLevel() == MemberPermission.ADMINISTRATOR.getLevel())) {
             return true;
         }
         final List<Long> otherAdmin = config.getConfig().getOtherAdmin();

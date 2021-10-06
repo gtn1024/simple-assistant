@@ -15,7 +15,22 @@ public class BotOfflineHandler extends SimpleListenerHost {
     }
 
     @EventHandler
-    public void onMessage(@NotNull BotOfflineEvent event) {
-        // TODO
+    public void onMessage(@NotNull BotOfflineEvent.Active event) {
+        // TODO: 主动离线
+    }
+
+    @EventHandler
+    public void onMessage(@NotNull BotOfflineEvent.Force event) {
+        // TODO: 被挤下线
+    }
+
+    @EventHandler
+    public void onMessage(@NotNull BotOfflineEvent.Dropped event) {
+        // TODO: 被服务器断开或因网络问题而掉线
+    }
+
+    @EventHandler
+    public void onMessage(@NotNull BotOfflineEvent.RequireReconnect event) {
+        // TODO: 服务器主动要求更换另一个服务器
     }
 }

@@ -2,6 +2,7 @@ package com.github.gtn1024.sa.admin;
 
 import com.github.gtn1024.sa.SimpleAssistant;
 import com.github.gtn1024.sa.config.SuperAdminConfig;
+import com.github.gtn1024.sa.utils.SuperAdminUtils;
 import kotlin.coroutines.CoroutineContext;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.SimpleListenerHost;
@@ -28,7 +29,7 @@ public class SuperAdminHandler extends SimpleListenerHost {
             return;
         }
 
-        if (!isSa(event.getSender().getId())) {
+        if (!SuperAdminUtils.isSa(event.getSender().getId())) {
             event.getGroup().sendMessage(new MessageChainBuilder()
                 .append(new At(event.getSender().getId()))
                 .append("，你不是超管，无法使用！")
@@ -36,10 +37,5 @@ public class SuperAdminHandler extends SimpleListenerHost {
             );
             return;
         }
-
-    }
-
-    private boolean isSa(long id) {
-        return SuperAdminConfig.INSTANCE.getSa() == id;
     }
 }

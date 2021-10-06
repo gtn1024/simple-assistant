@@ -13,3 +13,6 @@ repositories {
     maven("https://maven.aliyun.com/repository/public")
     mavenCentral()
 }
+dependencies {
+    implementation("net.mamoe.yamlkt:yamlkt:0.10.2")
+}
