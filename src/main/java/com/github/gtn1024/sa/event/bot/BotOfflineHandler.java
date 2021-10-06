@@ -11,12 +11,11 @@ public class BotOfflineHandler extends SimpleListenerHost {
     @Override
     public void handleException(@NotNull CoroutineContext context, @NotNull Throwable exception) {
         // 处理事件处理时抛出的异常
-        SimpleAssistant.INSTANCE.getLogger().error("Caught exception in BotOfflineHandler: ");
         SimpleAssistant.INSTANCE.getLogger().error(exception);
     }
 
     @EventHandler
-    public void onMessage(@NotNull BotOfflineEvent event) throws Exception { // 可以抛出任何异常, 将在 handleException 处理
+    public void onMessage(@NotNull BotOfflineEvent event) { // 可以抛出任何异常, 将在 handleException 处理
 
     }
 }

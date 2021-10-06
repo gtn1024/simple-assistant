@@ -1,7 +1,8 @@
 package com.github.gtn1024.sa;
 
+import com.github.gtn1024.sa.admin.SuperAdminHandler;
 import com.github.gtn1024.sa.config.GroupConfig;
-import com.github.gtn1024.sa.config.MainConfig;
+import com.github.gtn1024.sa.config.SuperAdminConfig;
 import com.github.gtn1024.sa.event.bot.BotOfflineHandler;
 import com.github.gtn1024.sa.event.message.GroupMessageHandler;
 import net.mamoe.mirai.Bot;
@@ -42,7 +43,7 @@ public final class SimpleAssistant extends JavaPlugin {
 
         getLogger().debug("Start to load plugin configures");
         getLogger().debug("--> Start to load MainConfig");
-        reloadPluginConfig(MainConfig.INSTANCE);
+        reloadPluginConfig(SuperAdminConfig.INSTANCE);
         getLogger().debug("--> MainConfig loaded!");
         getLogger().debug("--> Start to load GroupConfig");
         reloadPluginConfig(GroupConfig.INSTANCE);
@@ -70,7 +71,7 @@ public final class SimpleAssistant extends JavaPlugin {
         getLogger().debug("Groups remote: " + remoteGroups);
 
         remoteGroups.forEach(it -> {
-                if (!groupIsInList(it.getId(), groups)) {
+                if (!isGroupInList(it.getId(), groups)) {
                     // 配置文件不存在该群
                     getLogger().debug("----> Start to add " + it.getId() + " to group list");
                     GroupConfig.INSTANCE.getGroups().add(
@@ -86,15 +87,15 @@ public final class SimpleAssistant extends JavaPlugin {
         );
     }
 
-    private boolean groupIsInList(long id, List<GroupConfig.Group> list) {
+    private boolean isGroupInList(long id, List<GroupConfig.Group> list) {
         getLogger().debug("--> Check whether " + id + " in group list");
         for (GroupConfig.Group group : list) {
             if (group.getGroupId() == id) {
-                getLogger().debug("--> "+id + " is in group list");
+                getLogger().debug("--> " + id + " is in group list");
                 return true;
             }
         }
-        getLogger().debug("--> "+id + " is not in group list");
+        getLogger().debug("--> " + id + " is not in group list");
         return false;
     }
 
@@ -102,6 +103,9 @@ public final class SimpleAssistant extends JavaPlugin {
      * 注册监听事件
      */
     private void registerEvents() {
+        // 超管监听
+        GlobalEventChannel.INSTANCE.registerListenerHost(new SuperAdminHandler());
+
         // Bot
         GlobalEventChannel.INSTANCE.registerListenerHost(new BotOfflineHandler());    // Bot 离线事件处理
 

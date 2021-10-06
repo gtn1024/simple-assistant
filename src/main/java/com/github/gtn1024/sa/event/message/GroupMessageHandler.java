@@ -1,7 +1,7 @@
 package com.github.gtn1024.sa.event.message;
 
 import com.github.gtn1024.sa.SimpleAssistant;
-import com.github.gtn1024.sa.config.MainConfig;
+import com.github.gtn1024.sa.config.SuperAdminConfig;
 import kotlin.coroutines.CoroutineContext;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.SimpleListenerHost;
@@ -20,11 +20,11 @@ public class GroupMessageHandler extends SimpleListenerHost {
 
     @EventHandler
     public void onMessage(@NotNull GroupMessageEvent event) { // 可以抛出任何异常, 将在 handleException 处理
-        if (event.getSender().getId() != MainConfig.INSTANCE.getAdmin()) {
+        if (event.getSender().getId() != SuperAdminConfig.INSTANCE.getSa()) {
             event.getGroup().sendMessage(
                 new MessageChainBuilder()
                     .append("我只听")
-                    .append(new At(MainConfig.INSTANCE.getAdmin()))
+                    .append(new At(SuperAdminConfig.INSTANCE.getSa()))
                     .append("的话")
                     .build()
             );
