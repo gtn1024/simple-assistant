@@ -1,5 +1,6 @@
 package com.github.gtn1024.sa;
 
+import com.github.gtn1024.sa.admin.AdminHandler;
 import com.github.gtn1024.sa.admin.SuperAdminHandler;
 import com.github.gtn1024.sa.config.GroupConfig;
 import com.github.gtn1024.sa.config.SuperAdminConfig;
@@ -60,7 +61,7 @@ public final class SimpleAssistant extends JavaPlugin {
     private void generateConfig() {
         final List<Bot> bots = Bot.getInstances();
         if (bots.size() != 1) {
-            getLogger().error("未登录或登录的账号数量不为 1！");
+            getLogger().error("登录的账号数量不为 1！");
             return;
         }
 
@@ -77,6 +78,7 @@ public final class SimpleAssistant extends JavaPlugin {
                     GroupConfig.INSTANCE.getGroups().add(
                         new GroupConfig.Group(
                             it.getId(),
+                            "$",
                             new GroupConfig.Group.Config(
                                 true, true, null, false
                             )
@@ -105,6 +107,9 @@ public final class SimpleAssistant extends JavaPlugin {
     private void registerEvents() {
         // 超管监听
         GlobalEventChannel.INSTANCE.registerListenerHost(new SuperAdminHandler());
+
+        // 群管监听
+        GlobalEventChannel.INSTANCE.registerListenerHost(new AdminHandler());
 
         // Bot
         GlobalEventChannel.INSTANCE.registerListenerHost(new BotOfflineHandler());    // Bot 离线事件处理

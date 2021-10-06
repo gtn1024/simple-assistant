@@ -10,6 +10,7 @@ object GroupConfig : AutoSavePluginConfig("GroupConfig") {
     @Serializable
     data class Group(
         var groupId: Long,
+        var commandPrefix: String,
         var config: Config
     ) {
         @Serializable
@@ -23,8 +24,6 @@ object GroupConfig : AutoSavePluginConfig("GroupConfig") {
         override fun toString(): String {
             return "Group(groupId=$groupId)"
         }
-
-
     }
 
     val groups: MutableList<Group> by value()

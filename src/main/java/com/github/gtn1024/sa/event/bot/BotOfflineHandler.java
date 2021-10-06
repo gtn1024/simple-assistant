@@ -15,7 +15,7 @@ public class BotOfflineHandler extends SimpleListenerHost {
     }
 
     @EventHandler
-    public void onMessage(@NotNull BotOfflineEvent event) { // 可以抛出任何异常, 将在 handleException 处理
-
+    public void onMessage(@NotNull BotOfflineEvent event) {
+        // TODO
     }
 }

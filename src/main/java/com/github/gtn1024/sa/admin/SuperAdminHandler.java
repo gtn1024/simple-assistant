@@ -22,7 +22,11 @@ public class SuperAdminHandler extends SimpleListenerHost {
 
     @EventHandler
     public void onMessage(@NotNull GroupMessageEvent event) { // 可以抛出任何异常, 将在 handleException 处理
-        if (!event.getMessage().toString().startsWith(SuperAdminConfig.INSTANCE.getSaCommandPrefix())) return;
+        if (!event.getMessage().toString().trim().startsWith(
+            SuperAdminConfig.INSTANCE.getSaCommandPrefix().trim())
+        ) {
+            return;
+        }
 
         if (!isSa(event.getSender().getId())) {
             event.getGroup().sendMessage(new MessageChainBuilder()
