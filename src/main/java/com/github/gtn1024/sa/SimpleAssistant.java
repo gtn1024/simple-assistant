@@ -5,6 +5,8 @@ import com.github.gtn1024.sa.admin.SuperAdminHandler;
 import com.github.gtn1024.sa.config.GroupConfig;
 import com.github.gtn1024.sa.config.SuperAdminConfig;
 import com.github.gtn1024.sa.event.bot.BotOfflineHandler;
+import com.github.gtn1024.sa.event.friend.NewFriendRequestHandler;
+import com.github.gtn1024.sa.event.group.member.BotInvitedJoinGroupRequestHandler;
 import com.github.gtn1024.sa.event.message.GroupMessageHandler;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
@@ -105,16 +107,20 @@ public final class SimpleAssistant extends JavaPlugin {
      * 注册监听事件
      */
     private void registerEvents() {
-        // 超管监听
-        GlobalEventChannel.INSTANCE.registerListenerHost(new SuperAdminHandler());
-
-        // 群管监听
-        GlobalEventChannel.INSTANCE.registerListenerHost(new AdminHandler());
+        GlobalEventChannel.INSTANCE.registerListenerHost(new SuperAdminHandler());// 超管监听
+        GlobalEventChannel.INSTANCE.registerListenerHost(new AdminHandler());   // 群管监听
 
         // Bot
         GlobalEventChannel.INSTANCE.registerListenerHost(new BotOfflineHandler());    // Bot 离线事件处理
 
         // 消息
         GlobalEventChannel.INSTANCE.registerListenerHost(new GroupMessageHandler());  // 群消息事件处理
+
+        // 群
+        // 群成员
+        GlobalEventChannel.INSTANCE.registerListenerHost(new BotInvitedJoinGroupRequestHandler());  // 机器人被邀请加入群
+
+        // 好友
+        GlobalEventChannel.INSTANCE.registerListenerHost(new NewFriendRequestHandler());    // 一个账号请求添加机器人为好友
     }
 }
